@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Photo Gallery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+    
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    img:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Photo Gallery</h1>
+  <div id="gallery">
+    <img src="box1_image.jpg" alt="Sunset over the mountains">
+    <img src="box2_image.jpg" alt="A forest trail in autumn">
+    <img src="box3_image.jpg" alt="City skyline at night">
+    <img src="box4_image.jpg" alt="Beach with turquoise water">
+    <img src="box5_image.jpg" alt="Snowy mountain peak">
+    <img src="box6_image.jpg" alt="Colorful hot air balloons">
+    <img src="https://via.placeholder.com/150?text=Sunset" alt="Sunset over the mountains">
+    <img src="https://via.placeholder.com/150?text=Forest" alt="A forest trail in autumn">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
