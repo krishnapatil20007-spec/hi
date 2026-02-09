@@ -1,26 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>My First Web App</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Interactive Photo Gallery</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    #gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    img:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      border: 2px solid white;
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="container">
-        <h1>Welcome</h1>
-        <p id="text">Click the button</p>
+<h1>My Photo Gallery</h1>
 
-        <button onclick="changeText()">Click Me</button>
-    </div>
+<div id="gallery">
+  <!-- Images will load here -->
+</div>
 
-    <script >function changeText() {
-    document.getElementById("text").innerHTML =
-        "JavaScript is working!";
-}</script>
+<script>
+
+window.onload = function () {
+  console.log("Page Loaded");
+
+  loadRandomImages();
+  addTabIndex();
+};
+
+
+// Highlight on hover
+function highlight(event) {
+  event.target.style.border = "3px solid blue";
+}
+
+function removeHighlight(event) {
+  event.target.style.border = "";
+}
+
+
+// Keyboard focus
+function tabFocus(event) {
+  event.target.style.outline = "2px dashed red";
+}
+
+function tabBlur(event) {
+  event.target.style.outline = "";
+}
+
+
+// Make images focusable
+function addTabIndex() {
+
+  let images = document.querySelectorAll("#gallery img");
+
+  for (let i = 0; i < images.length; i++) {
+
+    images[i].setAttribute("tabindex", "0");
+
+    images[i].addEventListener("mouseover", highlight);
+    images[i].addEventListener("mouseleave", removeHighlight);
+
+    images[i].addEventListener("focus", tabFocus);
+    images[i].addEventListener("blur", tabBlur);
+  }
+}
+
+
+// Load Online Random Images
+function loadRandomImages() {
+
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = "";
+
+  for (let i = 0; i < 8; i++) {
+
+    const img = document.createElement("img");
+
+    // Online Image API (Free)
+    img.src = "https://picsum.photos/300/200?random=" + Math.random();
+
+    img.alt = "Random Photo " + (i + 1);
+
+    gallery.appendChild(img);
+  }
+}
+
+</script>
+
 </body>
-
-
 </html>
